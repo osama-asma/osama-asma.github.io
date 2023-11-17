@@ -1,0 +1,11 @@
+/* PhotoCarousel.css */
+.slick-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.slick-slide {
+  text-align: center;
+}

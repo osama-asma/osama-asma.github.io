@@ -1,38 +1,268 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --main-color: #394867;
+  --secondary-color: #c0c0c0;
+  --cui-modal-alignment: left;
+  --cui-modal-alignment-footer: right;
+  --cui-modal-background: white;
+  --cui-modal-icon-size: 24px;
+  --cui-modal-padding: 20px;
+  --cui-modal-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --cui-modal-title-font-size: 28px;
+  --cui-modal-width: 768px;
+  --cui-modal-width-small: 576px;
+  --cui-modal-width-large: 992px;
+  --cui-backdrop-opacity: 0.5;
+  --cui-spacing: 20px;
+  --cui-spacing-qtr: calc(var(--cui-spacing) * 0.25);
+  --cui-border-radius: 2px;
+  --cui-inactive-color: #495057;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--main-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 100px 150px;
+  border-radius: 8px;
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #394867;
+  text-align: center;
+}
+
+label {
+  color: var(--main-color);
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+}
+
+.arrow-container {
+  position: relative;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.arrow-container::before {
+  content: "";
+  position: absolute;
+  top: -20px; /* Adjust the distance of the arrow from the target element */
+  left: 50%;
+  transform: translateX(-50%);
+  border: solid transparent;
+  border-width: 20px; /* Adjust the size of the arrow */
+  border-bottom-color: #333; /* Arrow color */
+}
+
+.arrow-text {
+  position: absolute;
+  top: -40px; /* Adjust the distance of the text from the target element */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  background-color: #333; /* Text background color */
+  color: #fff; /* Text color */
+  border-radius: 5px;
+  white-space: nowrap; /* Prevent text from breaking to the next line */
+}
+
+.sound-wave-container {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100px;
 }
 
-.App-link {
-  color: #61dafb;
+.sound-wave.audio2 {
+  width: 10px;
+  height: 30px;
+  background-color: #e64c3c;
+  margin: 0 5px;
+  border-radius: 5px; /* Rounded corners */
+  animation: soundWaveAnimation 0.5s infinite alternate;
+  opacity: 0.8; /* Slightly transparent */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Soft shadow effect */
 }
 
-@keyframes App-logo-spin {
+.sound-wave.audio1 {
+  width: 10px;
+  height: 30px;
+  background-color: #e0b8a6;
+  margin: 0 5px;
+  border-radius: 5px; /* Rounded corners */
+  animation: soundWaveAnimation 0.5s infinite alternate;
+  opacity: 0.8; /* Slightly transparent */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Soft shadow effect */
+}
+
+@keyframes soundWaveAnimation {
   from {
-    transform: rotate(0deg);
+    height: 30px;
+    transform: translateY(0);
   }
   to {
-    transform: rotate(360deg);
+    height: 60px;
+    transform: translateY(-10px); /* Add vertical movement */
   }
+}
+
+.asma {
+  color: #fff;
+  cursor: pointer;
+}
+.asma.playing {
+  color: #e0b8a6;
+}
+.asma:hover {
+  color: #e0b8a6;
+}
+
+.osama {
+  color: #fff;
+  cursor: pointer;
+}
+.osama.playing {
+  color: #e64c3c;
+}
+.osama:hover {
+  color: #e64c3c;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1040;
+  transition: opacity 0.15s linear;
+  background-color: rgba(0, 0, 0, var(--cui-backdrop-opacity));
+}
+.modal .modal__dialog {
+  position: relative;
+  width: var(--cui-modal-width);
+  max-width: calc(100% - 0.01px);
+  margin: 0 auto;
+  padding: var(--cui-spacing);
+  -webkit-animation: blowup 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards,
+    fade-in 0.25s 1 linear;
+  animation: blowup 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards,
+    fade-in 0.25s 1 linear;
+}
+@media (max-width: 575.98px) {
+  .modal .modal__dialog {
+    padding: var(--cui-spacing-qtr);
+  }
+}
+.modal .modal__content {
+  position: relative;
+  display: block;
+  text-align: var(--cui-modal-alignment);
+  padding: var(--cui-modal-padding);
+  background-color: var(--cui-modal-background);
+  color: black;
+  border-radius: var(--cui-border-radius);
+  border: 0 none;
+  box-shadow: var(--cui-modal-shadow);
+}
+@media (max-width: 767.98px) {
+  .modal .modal__content {
+    padding: calc(var(--cui-spacing) * 0.5);
+  }
+}
+.modal .modal__content .modal__close {
+  font-size: var(--cui-modal-icon-size);
+  position: absolute;
+  right: var(--cui-spacing);
+  top: var(--cui-spacing);
+  color: var(--cui-inactive-color);
+}
+.modal .modal__content .modal__close:hover {
+  color: violet;
+  text-decoration: none;
+}
+.modal .modal__content .modal__header {
+  margin-bottom: var(--cui-spacing);
+}
+.modal .modal__content .modal__header .modal__title {
+  font-size: var(--cui-modal-title-font-size);
+}
+.modal .modal__content .modal__footer {
+  margin-top: var(--cui-spacing);
+  text-align: var(--cui-modal-alignment-footer);
+}
+.modal.modal--small .modal__dialog {
+  width: var(--cui-modal-width-small);
+}
+.modal.modal--large .modal__dialog {
+  width: var(--cui-modal-width-large);
+}
+.modal.modal--full .modal__dialog {
+  width: 100%;
+  padding: 0;
+}
+.modal.modal--fluid .modal__dialog {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.modal.modal--fluid .modal__content {
+  height: 100%;
+}
+
+.passcode-container {
+  max-width: 300px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.passcode-display {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.passcode-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.digit,
+.delete,
+.unlock {
+  padding: 15px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.digit:hover,
+.delete:hover,
+.unlock:hover {
+  background-color: #eee;
 }
