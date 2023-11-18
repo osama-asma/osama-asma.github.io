@@ -3,22 +3,23 @@ import iconClose from './icon-close-modal.svg'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Modal = ({ value, setValue, title, buttonText, showModal, handleSubmit, incorrectPassword }) => {
-  const StyledButtonLink = styled(Link)`
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #394867; /* Button background color */
-  color: #fff; /* Button text color */
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  text-align: center; /* Center the text horizontally */
+const StyledButtonLink = styled(Link)`
+display: inline-block;
+padding: 10px 20px;
+background-color: #394867; /* Button background color */
+color: #fff; /* Button text color */
+text-decoration: none;
+border-radius: 5px;
+font-size: 1rem;
+transition: background-color 0.3s ease;
+text-align: center; /* Center the text horizontally */
 
-  &:hover {
-    background-color: #526a82; /* Button background color on hover */
-  }
+&:hover {
+  background-color: #526a82; /* Button background color on hover */
+}
 `;
+
+const Modal = ({ value, setValue, title, buttonText, showModal, handleSubmit, incorrectPassword }) => {
   return (
     <div aria-modal role="dialog" className="modal" id="modal-default">
       <div className="modal__dialog">

@@ -2,6 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+const StyledButton = styled.button`
+padding: 10px;
+margin-top: 16px;
+background-color: #394867;
+color: #c0c0c0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-weight: bold;
+&:hover {
+    opacity: 90%;
+
+}
+`;
+
 const Login = ({ setIsLoggedIn, isLoggedIn }) => {
     const [password, setPassword] = useState('');
     const [wrong, setWrong] = useState(false);
@@ -24,21 +39,6 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
             navigate('/home');
         }
     }, [isLoggedIn, navigate]);
-
-    const StyledButton = styled.button`
-    padding: 10px;
-    margin-top: 16px;
-    background-color: #394867;
-    color: #c0c0c0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    &:hover {
-        opacity: 90%;
-
-    }
-`;
 
     return (
         <div>
