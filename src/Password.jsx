@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import config from './config';
 
 const PasscodeInput = ({ setIsUnlocked, isUnlocked }) => {
     const [enteredPasscode, setEnteredPasscode] = useState('');
     const [justSubmitted, setJustSubmitted] = useState(false);
-    const correctPasscode = '7249'; // Hardcoded 4-digit passcode
+    const correctPasscode = config.pin; // Hardcoded 4-digit passcode
     const navigate = useNavigate()
 
 

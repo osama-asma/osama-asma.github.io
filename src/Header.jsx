@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from './Modal';
+import config from './config'
 
 const StyledNavLink = styled(NavLink)`
 text-decoration: none;
@@ -93,7 +94,7 @@ const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed }) => {
     const [justSubmitted, setJustSubmitted] = useState(false);
 
     const handleSubmit = (value) => {
-        if (value === 'sharpener') {
+        if (value === config.thirdGradePassword) {
             sessionStorage.setItem('isAuthed', 'true');
             setIsAuthed(true);
             setShowModal(false);
