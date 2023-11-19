@@ -100,7 +100,7 @@ const Party = () => {
                 height={iconSize}
             />
 
-            <div style={{ width: '100%', borderTop: '1px solid #e0b8a6', marginTop: '48px', marginBottom: '48px' }}></div>
+            <div style={{ width: '100%', borderTop: '1px solid #DFB16B', marginTop: '48px', marginBottom: '48px' }}></div>
 
             <div style={{ fontSize: width > 576 ? '24px' : '18px', marginBottom: '24px', color: '#e0b8a6' }}>Gallery</div>
             <PhotoGallery images={photos} />

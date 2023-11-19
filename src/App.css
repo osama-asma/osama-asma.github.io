@@ -283,3 +283,8 @@ input {
 .unlock:hover {
   background-color: #eee;
 }
+
+.language:hover {
+  color: #dfb16b;
+  cursor: pointer;
+}

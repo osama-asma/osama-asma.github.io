@@ -175,7 +175,7 @@ const LandingPage = ({ setIsAuthed, isAuthed, setJustSubmitted, justSubmitted, a
     }
   }, [isAuthed, justSubmitted, navigate, setJustSubmitted]);
 
-
+  const [isArabic, setIsArabic] = useState(false)
 
   return (
     <>
@@ -183,20 +183,33 @@ const LandingPage = ({ setIsAuthed, isAuthed, setJustSubmitted, justSubmitted, a
       <LandingPageContainer>
         <BackgroundImage />
         <Overlay />
-        <Title>
+        {!isArabic ? <Title>
           <span
             onClick={playAudio1}
             className={`asma ${isAudioPlaying && activeAudio === 'audio1' ? 'playing' : ''}`}
           >
             Asma
-          </span> & {" "}
+          </span> <span className='language' onClick={() => setIsArabic(true)}>&</span> {" "}
           <span
             onClick={playAudio2}
             className={`osama ${isAudioPlaying && activeAudio === 'audio2' ? 'playing' : ''}`}
           >
             Osama
           </span>
-        </Title>
+        </Title> : <Title>
+          <span
+            onClick={playAudio1}
+            className={`asma ${isAudioPlaying && activeAudio === 'audio1' ? 'playing' : ''}`}
+          >
+            أسماء
+          </span> <span className='language' onClick={() => setIsArabic(false)}>و</span> {" "}
+          <span
+            onClick={playAudio2}
+            className={`osama ${isAudioPlaying && activeAudio === 'audio2' ? 'playing' : ''}`}
+          >
+            أسامة
+          </span>
+        </Title>}
         {isAudioPlaying ? <Subtitle style={{ display: 'flex', alignItems: 'center' }}>
           <SoundWave activeAudio={activeAudio} />
           <StopButton onClick={stopAudio}>Stop</StopButton>
