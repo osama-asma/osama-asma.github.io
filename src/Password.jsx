@@ -5,7 +5,7 @@ import config from './config';
 const PasscodeInput = ({ setIsUnlocked, isUnlocked }) => {
     const [enteredPasscode, setEnteredPasscode] = useState('');
     const [justSubmitted, setJustSubmitted] = useState(false);
-    const correctPasscode = config.pin; // Hardcoded 4-digit passcode
+    const correctPasscode = config.galacticPancake; // Hardcoded 4-digit passcode
     const navigate = useNavigate()
 
 
@@ -49,7 +49,7 @@ const PasscodeInput = ({ setIsUnlocked, isUnlocked }) => {
 
     return (
         <div className="passcode-container">
-            <div className="passcode-display">{enteredPasscode}</div>
+            {enteredPasscode.length > 0 ? <div className="passcode-display">{enteredPasscode}</div> : null}
 
             <div className="passcode-buttons">
                 <div className="digit" onClick={() => handleDigitClick('1')}>1</div>

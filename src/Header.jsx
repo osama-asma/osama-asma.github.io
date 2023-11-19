@@ -51,13 +51,8 @@ background-color: #E64C3C;
 color: #fff;
 padding: 10px;
 `;
-const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation()
-    const partyPage = location.pathname === '/party'
-    const navigate = useNavigate()
 
-    const NavLinksContainer = styled.div`
+const NavLinksContainer = styled.div`
   display: flex;
   justify-content: space-around;
 
@@ -67,18 +62,16 @@ const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed }) => {
     display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   }
 `;
+const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed, justSubmitted, setJustSubmitted }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation()
+    const partyPage = location.pathname === '/party'
+    const navigate = useNavigate()
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleLogout = () => {
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('isAuthed');
-        sessionStorage.removeItem('isUnlocked');
-        setIsLoggedIn(false);
-        setIsAuthed(false)
-    };
     const [showModal, setShowModal] = useState(false)
     // State to manage the input value
     const [inputValue, setInputValue] = useState('');
@@ -91,10 +84,8 @@ const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed }) => {
         setInputValue(event.target.value);
     };
 
-    const [justSubmitted, setJustSubmitted] = useState(false);
-
     const handleSubmit = (value) => {
-        if (value === config.thirdGradePassword) {
+        if (value === config.quantumPenguin) {
             sessionStorage.setItem('isAuthed', 'true');
             setIsAuthed(true);
             setShowModal(false);
@@ -104,12 +95,21 @@ const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed }) => {
         }
     };
 
+    const handleLogout = () => {
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('isAuthed');
+        sessionStorage.removeItem('isUnlocked');
+        setIsLoggedIn(false);
+        setIsAuthed(false)
+        setJustSubmitted(false)
+    };
+
     useEffect(() => {
         if (isAuthed && justSubmitted) {
             navigate('/auth');
             setJustSubmitted(false); // Reset the state after navigation
         }
-    }, [isAuthed, justSubmitted, navigate]);
+    }, [isAuthed, justSubmitted, navigate, setJustSubmitted]);
 
 
     return (

@@ -62,18 +62,12 @@ width: 100%;
 padding: 0 20px;
 transform: translateY(-50%);
 `;
-const CustomCarousel = ({ photos }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-  const location = useLocation();
-  const partyPage = location.pathname === '/party';
 
-  const Arrow = styled.div`
+const KatibArrow = styled.div`
     position: absolute;
     top: 50%;
     font-size: 24px;
-    color: ${partyPage ? '#f4d1c5' : '#DFB16B'};
+    color: #E64C3C;
     background-color: white;
     border: none;
     border-radius: 50%;
@@ -88,7 +82,41 @@ const CustomCarousel = ({ photos }) => {
 
     &:hover {
       color: white; /* Change color on hover */
-      background-color: ${partyPage ? '#f4d1c5' : '#DFB16B'}; /* Change background color on hover */
+      background-color: #E64C3C; /* Change background color on hover */
+      opacity: 1; /* Remove transparency on hover */
+    }
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+      padding: 8px;
+  }
+
+    &::before {
+      content: '${({ direction }) => (direction === 'left' ? '\\2190' : '\\2192')}';
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+    }
+  `;
+const PartyArrow = styled.div`
+    position: absolute;
+    top: 50%;
+    font-size: 24px;
+    color: #f4d1c5;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+
+    ${({ direction }) => (direction === 'left' ? 'left: 10px;' : 'right: 10px;')}
+
+    opacity: 0.8; /* Set the desired opacity for the arrow components */
+
+    &:hover {
+      color: white; /* Change color on hover */
+      background-color: #f4d1c5; /* Change background color on hover */
       opacity: 1; /* Remove transparency on hover */
     }
 
@@ -104,25 +132,26 @@ const CustomCarousel = ({ photos }) => {
     }
   `;
 
-  const ModalContainer = styled.div`
-    display: ${({ showModal }) => (showModal ? 'flex' : 'none')};
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-  `;
+const ModalContainer = styled.div`
+  display: ${({ showModal }) => (showModal ? 'flex' : 'none')};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+`;
 
-  const CloseButton = styled.div`
+
+const KatibCloseButton = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
     font-size: 24px;
-    color: ${partyPage ? '#f4d1c5' : '#DFB16B'};
+    color: #E64C3C;
     background-color: white;
     border: 2px solid #fff; /* White border */
     border-radius: 20px; /* Adjust the border-radius to make it a horizontal oval */
@@ -135,7 +164,33 @@ const CustomCarousel = ({ photos }) => {
 
     &:hover {
       color: white; /* Change color on hover */
-      background-color: ${partyPage ? '#f4d1c5' : '#DFB16B'}; /* Change background color on hover */
+      background-color: #E64C3C; /* Change background color on hover */
+    opacity: 1; /* Remove transparency on hover */
+    }
+    @media (max-width: 768px) {
+      font-size: 16px;
+      padding: 8px 10px;
+  }
+  `;
+const PartyCloseButton = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #f4d1c5;
+    background-color: white;
+    border: 2px solid #fff; /* White border */
+    border-radius: 20px; /* Adjust the border-radius to make it a horizontal oval */
+    padding: 8px 12px; /* Adjust padding for a horizontal oval shape */
+    cursor: pointer;
+    z-index: 3; /* Ensure the close button appears above the image */
+
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    opacity: 0.8; /* Set the desired opacity for the arrow components */
+
+    &:hover {
+      color: white; /* Change color on hover */
+      background-color: #f4d1c5; /* Change background color on hover */
     opacity: 1; /* Remove transparency on hover */
     }
     @media (max-width: 768px) {
@@ -144,9 +199,10 @@ const CustomCarousel = ({ photos }) => {
   }
   `;
 
-  const ArrowModal = styled.div`
+
+const KatibArrowModal = styled.div`
   font-size: 24px;
-  color: ${partyPage ? '#f4d1c5' : '#DFB16B'};
+  color: #E64C3C;
   background-color: white;
   border: 2px solid #fff;
   border-radius: 20px;
@@ -159,7 +215,7 @@ const CustomCarousel = ({ photos }) => {
 
   &:hover {
     color: white; /* Change color on hover */
-      background-color: ${partyPage ? '#f4d1c5' : '#DFB16B'}; /* Change background color on hover */
+      background-color:#E64C3C; /* Change background color on hover */
     opacity: 1; /* Remove transparency on hover */
 
   }
@@ -169,6 +225,38 @@ const CustomCarousel = ({ photos }) => {
     padding: 8px;
 }
 `;
+const PartyArrowModal = styled.div`
+  font-size: 24px;
+  color: #f4d1c5;
+  background-color: white;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 3;
+
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  opacity: 0.8; /* Set the desired opacity for the arrow components */
+
+  &:hover {
+    color: white; /* Change color on hover */
+      background-color: #f4d1c5; /* Change background color on hover */
+    opacity: 1; /* Remove transparency on hover */
+
+  }
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    padding: 8px;
+}
+`;
+
+const CustomCarousel = ({ photos }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const location = useLocation();
+  const partyPage = location.pathname === '/party';
 
   const nextSlideCarousel = useCallback(() => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % photos.length);
@@ -208,7 +296,9 @@ const CustomCarousel = ({ photos }) => {
   return (
     <>
       <CarouselContainer>
-        <Arrow direction="left" onClick={prevSlideCarousel}></Arrow>
+        {partyPage ? <PartyArrow direction="left" onClick={prevSlideCarousel}></PartyArrow>
+          : <KatibArrow direction="left" onClick={prevSlideCarousel}></KatibArrow>
+        }
         <SlideContainer style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
           {photos.map((photo, index) => (
             <Slide key={index} onClick={() => openModal(index)}>
@@ -216,31 +306,50 @@ const CustomCarousel = ({ photos }) => {
             </Slide>
           ))}
         </SlideContainer>
-        <Arrow direction="right" onClick={nextSlideCarousel}></Arrow>
+        {partyPage ? <PartyArrow direction="right" onClick={nextSlideCarousel}></PartyArrow>
+          : <KatibArrow direction="right" onClick={nextSlideCarousel}></KatibArrow>
+        }
       </CarouselContainer>
 
       <ModalContainer showModal={showModal} onClick={closeModal}>
         <ModalContent>
-          <CloseButton onClick={closeModal}>&times;</CloseButton>
+          {partyPage ? <PartyCloseButton onClick={closeModal}>&times;</PartyCloseButton>
+            : <KatibCloseButton onClick={closeModal}>&times;</KatibCloseButton>
+          }
           <ModalImage src={photos[selectedImageIndex]} alt={`Selected Photo`} />
           <NavigationArrows>
-
-            <ArrowModal
+            {partyPage ? <PartyArrowModal
               onClick={(e) => {
                 e.stopPropagation();
                 prevSlideModal();
               }}
             >
               &lt;
-            </ArrowModal>
-            <ArrowModal
+            </PartyArrowModal> : <KatibArrowModal
+              onClick={(e) => {
+                e.stopPropagation();
+                prevSlideModal();
+              }}
+            >
+              &lt;
+            </KatibArrowModal>}
+
+
+            {partyPage ? <PartyArrowModal
               onClick={(e) => {
                 e.stopPropagation();
                 nextSlideModal();
               }}
             >
               &gt;
-            </ArrowModal>
+            </PartyArrowModal> : <KatibArrowModal
+              onClick={(e) => {
+                e.stopPropagation();
+                nextSlideModal();
+              }}
+            >
+              &gt;
+            </KatibArrowModal>}
 
           </NavigationArrows>
         </ModalContent>

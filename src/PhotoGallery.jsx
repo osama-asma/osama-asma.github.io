@@ -120,7 +120,7 @@ opacity: 0.8; /* Set the desired opacity for the arrow components */
 
 &:hover {
 color: white; /* Change color on hover */
-  background-color: '#f4d1c5'; /* Change background color on hover */
+  background-color: #f4d1c5; /* Change background color on hover */
 opacity: 1; /* Remove transparency on hover */
 
 }
@@ -194,6 +194,19 @@ justify-content: space-between;
 width: 100%;
 `;
 
+const ModalContainer = styled.div`
+display: ${({ showModal }) => (showModal ? 'flex' : 'none')};
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(255, 255, 255, 0.9);
+align-items: center;
+justify-content: center;
+z-index: 2;
+`;
+
 const PhotoGallery = ({ images }) => {
     const [showModal, setShowModal] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -221,19 +234,6 @@ const PhotoGallery = ({ images }) => {
             prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
     };
-
-    const ModalContainer = styled.div`
-    display: ${({ showModal }) => (showModal ? 'flex' : 'none')};
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-  `;
 
     return (
         <>

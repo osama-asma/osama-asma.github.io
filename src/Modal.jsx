@@ -20,6 +20,13 @@ text-align: center; /* Center the text horizontally */
 `;
 
 const Modal = ({ value, setValue, title, buttonText, showModal, handleSubmit, incorrectPassword }) => {
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(value);
+    }
+  };
+
   return (
     <div aria-modal role="dialog" className="modal" id="modal-default">
       <div className="modal__dialog">
@@ -34,6 +41,7 @@ const Modal = ({ value, setValue, title, buttonText, showModal, handleSubmit, in
               type="text"
               value={value}
               onChange={setValue}
+              onKeyDown={handleKeyPress}
               placeholder="What did osama break in the third grade?"
               style={{ width: '100%' }}
             />

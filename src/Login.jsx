@@ -27,7 +27,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (password === config.loginPassword) {
+        if (password === config.bananaCactus || password === config.stellarRainbow) {
             sessionStorage.setItem('isLoggedIn', 'true');
             setIsLoggedIn(true);
         } else {
@@ -65,7 +65,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
                     </>}
                     <StyledButton type='submit'>Log in</StyledButton>
                 </form>
-            </div >
+            </div>
         </div>
 
     );
