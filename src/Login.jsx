@@ -55,6 +55,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
                                     setWrong(false)
                                     setPassword(e.target.value)
                                 }}
+                                style={{ touchAction: 'manipulation' }}
                             />
                         </label>
                     </div>
