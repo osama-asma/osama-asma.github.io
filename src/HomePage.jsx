@@ -158,7 +158,7 @@ const LandingPage = ({ setIsAuthed, isAuthed, setJustSubmitted, justSubmitted, a
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (value) => {
-    if (value === config.quantumPenguin) {
+    if (value === config.quantumPenguin || value === config.moonGiraffe) {
       sessionStorage.setItem('isAuthed', 'true');
       setIsAuthed(true);
       setShowModal(false);

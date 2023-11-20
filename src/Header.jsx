@@ -85,7 +85,7 @@ const Header = ({ setIsLoggedIn, setIsAuthed, isAuthed, justSubmitted, setJustSu
     };
 
     const handleSubmit = (value) => {
-        if (value === config.quantumPenguin) {
+        if (value === config.quantumPenguin || value === config.moonGiraffe) {
             sessionStorage.setItem('isAuthed', 'true');
             setIsAuthed(true);
             setShowModal(false);
