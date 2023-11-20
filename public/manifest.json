@@ -11,6 +11,11 @@
       "src": "./flower1.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "./flower1.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ]
 }
